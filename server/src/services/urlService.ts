@@ -1,4 +1,10 @@
 import qrcode from "qrcode";
+import { customAlphabet } from "nanoid";
+
+// Custom alphabet for NanoID
+const alphabet =
+  "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+const nanoid = customAlphabet(alphabet, 8); // Generates a 8-character ID
 
 export const isValidUrl = (url: string): boolean => {
   try {
@@ -18,7 +24,6 @@ export const generateQRCode = async (text: string): Promise<string> => {
   }
 };
 
-export const generateShortId = async (): Promise<string> => {
-  const { nanoid } = await import("nanoid");
-  return nanoid();
+export const generateShortId = (): string => {
+  return nanoid(); // Generate a random ID
 };

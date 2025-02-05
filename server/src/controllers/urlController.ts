@@ -17,13 +17,13 @@ export const shortenUrl = async (
     return;
   }
 
-  const shortId = await generateShortId();
-  const qrCode = await generateQRCode(`http://localhost:3000/${shortId}`);
+  const shortId = generateShortId();
+  const qrCode = await generateQRCode(`http://short-url.io/${shortId}`);
 
   const url = new Url({ longUrl, shortId, qrCode });
   await url.save();
 
-  res.json({ shortUrl: `http://localhost:3000/${shortId}`, qrCode });
+  res.json({ shortUrl: `http://short-url.io/${shortId}`, qrCode });
 };
 
 export const redirectUrl = async (

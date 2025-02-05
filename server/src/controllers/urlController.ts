@@ -58,3 +58,30 @@ export const getAnalytics = async (
 
   res.json({ clicks: url.clicks });
 };
+
+export const getAllUrls = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const urls = await Url.find();
+    res.json(urls);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch URLs" });
+  }
+};
+
+export const deleteUrl = async (req: Request, res: Response): Promise<void> => {
+  const { shortId } = req.params;
+
+  try {
+    const url = await Url.findOneAndDelete({ shortId });
+    if (!url) {
+      res.status(404).json({ error: "URL not found" });
+      return;
+    }
+    res.json({ message: "URL deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to delete URL" });
+  }
+};

@@ -12,6 +12,7 @@ const UrlItem = ({
   onUrlDeleted: () => void;
 }) => {
   const [showQR, setShowQR] = useState(false);
+  const baseUrl = window.location.origin;
 
   const handleDelete = async () => {
     try {
@@ -24,7 +25,7 @@ const UrlItem = ({
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(`http://localhost:5173/${url.shortId}`);
+    navigator.clipboard.writeText(`${baseUrl}/${url.shortId}`);
     toast.success("Copied to clipboard!");
   };
 
@@ -33,11 +34,8 @@ const UrlItem = ({
       <tr className="border-t hover:bg-gray-100">
         <td className="p-3 truncate max-w-xs">{url.longUrl}</td>
         <td className="p-3">
-          <a
-            href={`http://localhost:5173/${url.shortId}`}
-            className="text-blue-600"
-          >
-            localhost:5173/{url.shortId}
+          <a href={`${baseUrl}/${url.shortId}`} className="text-blue-600">
+            {window.location.host}/{url.shortId}
           </a>
         </td>
         <td className="p-3">{url.clicks}</td>
@@ -68,10 +66,7 @@ const UrlItem = ({
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-5 rounded-lg shadow-lg text-center">
             <h2 className="text-lg font-semibold mb-3">QR Code</h2>
-            <QRCodeCanvas
-              value={`http://localhost:5173/${url.shortId}`}
-              size={150}
-            />
+            <QRCodeCanvas value={`${baseUrl}/${url.shortId}`} size={150} />
             <button
               onClick={() => setShowQR(false)}
               className="mt-4 px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-900"

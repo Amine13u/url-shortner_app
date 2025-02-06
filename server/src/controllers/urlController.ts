@@ -18,12 +18,12 @@ export const shortenUrl = async (
   }
 
   const shortId = generateShortId();
-  const qrCode = await generateQRCode(`http://localhost:5173/${shortId}`);
+  const qrCode = await generateQRCode(`${process.env.CLIENT_URL}/${shortId}`);
 
   const url = new Url({ longUrl, shortId, qrCode });
   await url.save();
 
-  res.json({ shortUrl: `http://localhost:5173/${shortId}`, qrCode });
+  res.json({ shortUrl: `${process.env.CLIENT_URL}/${shortId}`, qrCode });
 };
 
 export const redirectUrl = async (

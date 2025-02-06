@@ -29,17 +29,19 @@ describe("URL Controller", () => {
   });
 
   describe("redirectUrl", () => {
-    it("should redirect to the original URL", async () => {
+    it("should return the long URL for an existing short ID", async () => {
       req.params = { shortId: "ABC123" };
-      (Url.findOne as jest.Mock).mockResolvedValue({
+      const mockUrl = {
         longUrl: "https://example.com",
         clicks: 0,
         save: jest.fn(),
-      });
+      };
+      (Url.findOne as jest.Mock).mockResolvedValue(mockUrl);
 
       await redirectUrl(req as Request, res as Response);
 
-      expect(res.redirect).toHaveBeenCalledWith("https://example.com");
+      expect(res.json).toHaveBeenCalledWith({ longUrl: mockUrl.longUrl });
+      expect(mockUrl.save).toHaveBeenCalled();
     });
 
     it("should return 404 for a non-existent short ID", async () => {

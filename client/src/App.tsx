@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import UrlShortener from "./components/UrlShortener";
 import UrlList from "./components/UrlList";
 import RedirectPage from "./components/RedirectPage";
@@ -15,7 +15,7 @@ const App = () => {
       <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-gray-100 p-6">
         <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-3xl">
           <h1 className="text-3xl font-bold text-center text-blue-600 mb-6">
-            🔗 URL Shortener
+            <Link to="/">🔗 URL Shortener</Link>
           </h1>
           <UrlShortener onUrlShortened={() => setRefresh((prev) => prev + 1)} />
           <UrlList key={refresh} />

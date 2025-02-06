@@ -64,7 +64,8 @@ export const getAllUrls = async (
   res: Response
 ): Promise<void> => {
   try {
-    const urls = await Url.find();
+    const urls = await Url.find({});
+
     res.json(urls);
   } catch (err) {
     res.status(500).json({ error: "Failed to fetch URLs" });

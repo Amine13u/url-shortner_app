@@ -10,9 +10,9 @@ import {
 const router = express.Router();
 
 router.post("/shorten", shortenUrl);
+router.get("/shorten/urls", getAllUrls);
 router.get("/:shortId", redirectUrl);
 router.get("/analytics/:shortId", getAnalytics);
-router.get("/urls", getAllUrls);
 router.delete("/urls/:shortId", deleteUrl);
 
 export default router;

@@ -18,12 +18,12 @@ export const shortenUrl = async (
   }
 
   const shortId = generateShortId();
-  const qrCode = await generateQRCode(`http://short-url.io/${shortId}`);
+  const qrCode = await generateQRCode(`http://localhost:5173/${shortId}`);
 
   const url = new Url({ longUrl, shortId, qrCode });
   await url.save();
 
-  res.json({ shortUrl: `http://short-url.io/${shortId}`, qrCode });
+  res.json({ shortUrl: `http://localhost:5173/${shortId}`, qrCode });
 };
 
 export const redirectUrl = async (
@@ -41,7 +41,7 @@ export const redirectUrl = async (
   url.clicks += 1;
   await url.save();
 
-  res.redirect(url.longUrl);
+  res.json({ longUrl: url.longUrl });
 };
 
 export const getAnalytics = async (

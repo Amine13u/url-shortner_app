@@ -24,7 +24,7 @@ const UrlItem = ({
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(`http://short-url.io/${url.shortId}`);
+    navigator.clipboard.writeText(`http://localhost:5173/${url.shortId}`);
     toast.success("Copied to clipboard!");
   };
 
@@ -34,10 +34,10 @@ const UrlItem = ({
         <td className="p-3 truncate max-w-xs">{url.longUrl}</td>
         <td className="p-3">
           <a
-            href={`http://short-url.io/${url.shortId}`}
+            href={`http://localhost:5173/${url.shortId}`}
             className="text-blue-600"
           >
-            short-url.io/{url.shortId}
+            localhost:5173/{url.shortId}
           </a>
         </td>
         <td className="p-3">{url.clicks}</td>
@@ -69,7 +69,7 @@ const UrlItem = ({
           <div className="bg-white p-5 rounded-lg shadow-lg text-center">
             <h2 className="text-lg font-semibold mb-3">QR Code</h2>
             <QRCodeCanvas
-              value={`http://short-url.io/${url.shortId}`}
+              value={`http://localhost:5173/${url.shortId}`}
               size={150}
             />
             <button

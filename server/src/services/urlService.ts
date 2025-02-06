@@ -8,8 +8,8 @@ const nanoid = customAlphabet(alphabet, 8); // Generates a 8-character ID
 
 export const isValidUrl = (url: string): boolean => {
   try {
-    new URL(url);
-    return true;
+    const parsedUrl = new URL(url);
+    return parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:";
   } catch (err) {
     return false;
   }
